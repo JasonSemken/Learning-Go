@@ -87,8 +87,8 @@ import (
 //	Below is Tag
 
 type Animal struct {
-	Name   string `required max: "100"`
 	Origin string
+	name   string
 }
 
 func main() {

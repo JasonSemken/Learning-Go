@@ -17,16 +17,24 @@ func calculateFuel(planet string) int {
 
 	switch planet {
 	case "Mercury":
-		fuel = 500000
+		fuel = 700
 	case "Venus":
-		fuel = 300000
+		fuel = 300
 	case "Mars":
-		fuel = 700000
+		fuel = 500
+	case "Juipter":
+		fuel = 1200
+	case "Saturn":
+		fuel = 1500
+	case "Uranus":
+		fuel = 2000
+	case "Neptune":
+		fuel = 2500
 	}
 	return fuel
 }
 
-// Prints Planet greating to terminal
+// Prints planet greating to terminal
 func greetPlanet() {
 	fmt.Println("Welcome to planet", planetChoice)
 }
@@ -56,20 +64,31 @@ func flyToPlanet(planet string, fuel int) int {
 
 // Collects user planet input and compares to list. If not on list the function will restart.
 func planetInput() {
-	fmt.Println("Where would you like to go? Mars, Venus, or Mercury.")
+	fmt.Println("Where would you like to go?")
 	fmt.Scan(&planetChoice)
 
 	switch planetChoice {
 	case "Mercury":
-		calculateFuel(planetChoice)
+		fmt.Println("We need 700 units of fuel to get there")
 	case "Venus":
 		calculateFuel(planetChoice)
+	case "Earth":
+		fmt.Println("We are already on Earth! Try again.")
+		planetInput()
 	case "Mars":
 		calculateFuel(planetChoice)
+	case "Jupiter":
+		calculateFuel(planetChoice)
+	case "Saturn":
+		calculateFuel(planetChoice)
+	case "Uranus":
+		calculateFuel(planetChoice)
+	case "Neptune":
+		calculateFuel(planetChoice)
+
 	default:
 		fmt.Println("That's not a planet!! Try again.")
 		planetInput()
-
 	}
 
 }

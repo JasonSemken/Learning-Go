@@ -2,31 +2,18 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
-// Create the function fuelGauge() here
+var planetChoice string
+
+// Printers remaining fuel to terminal
 func fuelGuage(fuelRemaining int) {
 	fmt.Println("You have", fuelRemaining, "gallons of fuel left!")
 }
 
-// Create the function calculateFuel() here
+// Reports fuel requirement for each planet
 func calculateFuel(planet string) int {
 	var fuel int
-
-	// function configured for 'if else' or switch. Comment out either to test.
-
-	//if planet == "Mercury" {
-	//	fuel = 500000
-	//} else if planet == "Venus" {
-	//	fuel = 300000
-	//} else if planet == "Mars" {
-	//	fuel = 700000
-	//} else {
-	//	fmt.Println("That's not a planet!! Try again.")
-	//	os.Exit(69)
-	//}
-	//return fuel
 
 	switch planet {
 	case "Mercury":
@@ -35,24 +22,21 @@ func calculateFuel(planet string) int {
 		fuel = 300000
 	case "Mars":
 		fuel = 700000
-	default:
-		fmt.Println("That's not a planet!! Try again.")
-		os.Exit(69)
 	}
 	return fuel
 }
 
-// Create the function greetPlanet() here
-func greetPlanet(planet string) {
-	fmt.Println("Welcome to planet", planet)
+// Prints Planet greating to terminal
+func greetPlanet() {
+	fmt.Println("Welcome to planet", planetChoice)
 }
 
-// Create the function cantFly() here
+// Prints fuel warning to terminal
 func cantFly() {
 	fmt.Println("We do not have the available fuel to fly there.")
 }
 
-// Create the function flyToPlanet() here
+// main fucntion for calculating if you can fly to a planet
 func flyToPlanet(planet string, fuel int) int {
 	var fuelRemaining, fuelCost int
 	fuelRemaining = fuel
@@ -60,7 +44,7 @@ func flyToPlanet(planet string, fuel int) int {
 	fuelCost = calculateFuel(planet)
 
 	if fuelRemaining >= fuelCost {
-		greetPlanet(planet)
+		greetPlanet()
 		fuelRemaining = fuelRemaining - fuelCost
 	} else {
 		cantFly()
@@ -70,21 +54,35 @@ func flyToPlanet(planet string, fuel int) int {
 
 }
 
-func main() {
-	// Test your functions!
-
-	// Create `planetChoice` and `fuel`
-	var planetChoice string
-	var fuelInput int
-
+// Collects user planet input and compares to list. If not on list the function will restart.
+func planetInput() {
 	fmt.Println("Where would you like to go? Mars, Venus, or Mercury.")
 	fmt.Scan(&planetChoice)
 
-	//fmt.Println("How much fuel do we have?")
-	//fmt.Scan(&fuelInput)
-	//fuelAmount := 1000000
-	//planetChoice := "Mars"
+	switch planetChoice {
+	case "Mercury":
+		calculateFuel(planetChoice)
+	case "Venus":
+		calculateFuel(planetChoice)
+	case "Mars":
+		calculateFuel(planetChoice)
+	default:
+		fmt.Println("That's not a planet!! Try again.")
+		planetInput()
+
+	}
+
+}
+
+func main() {
+
+	var fuelInput int
+
+	planetInput()
+
+	fmt.Println("How much fuel do we have?")
+	fmt.Scan(&fuelInput)
+
 	flyToPlanet(planetChoice, fuelInput)
-	// And then liftoff!
 
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
 
 var planetChoice string
@@ -61,10 +62,10 @@ func flyToPlanet(planet string, fuel int) {
 	if fuelRemaining >= fuelCost {
 		greetPlanet()
 		fuelRemaining = fuelRemaining - fuelCost
+		fuelGuage(fuelRemaining)
 	} else {
 		cantFly()
 	}
-	fuelGuage(fuelRemaining)
 }
 
 // Collects user planet input and compares to list. If not on list the function will restart.
@@ -96,14 +97,38 @@ func planetInput() {
 	}
 }
 
+// Collects inpurt for fuel from user
+func fuelInput() int {
+	var fuelChoice int
+	fmt.Println("How much fuel do we have?")
+	fmt.Scan(&fuelChoice)
+	return fuelChoice
+}
+
+// Asks the user if they would like to play again
+func restartGame() {
+	var restartGameInput string
+	fmt.Println("Would you like to try another planet? Yes or No")
+	fmt.Scan(&restartGameInput)
+
+	if restartGameInput == "Yes" {
+		main()
+	} else if restartGameInput == "yes" {
+		main()
+	} else {
+		os.Exit(0)
+	}
+
+}
+
 func main() {
 
-	var fuelInput int
-
+	// starts the planetInput function
 	planetInput()
 
-	fmt.Println("How much fuel do we have?")
-	fmt.Scan(&fuelInput)
+	// starts the flyToPlanet function
+	flyToPlanet(planetChoice, fuelInput())
 
-	flyToPlanet(planetChoice, fuelInput)
+	// starts the restartGame function
+	restartGame()
 }

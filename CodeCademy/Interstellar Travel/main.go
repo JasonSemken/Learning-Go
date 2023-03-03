@@ -5,8 +5,15 @@ import (
 )
 
 var planetChoice string
+var fuelMercury int = 700
+var fuelVenus int = 300
+var fuelMars int = 500
+var fuelJupiter int = 1200
+var fuelSaturn int = 1500
+var fuelUranus int = 2000
+var fuelNeptune int = 2500
 
-// Printers remaining fuel to terminal
+// Printer remaining fuel to terminal
 func fuelGuage(fuelRemaining int) {
 	fmt.Println("You have", fuelRemaining, "gallons of fuel left!")
 }
@@ -17,19 +24,19 @@ func calculateFuel(planet string) int {
 
 	switch planet {
 	case "Mercury":
-		fuel = 700
+		fuel = fuelMercury
 	case "Venus":
-		fuel = 300
+		fuel = fuelVenus
 	case "Mars":
-		fuel = 500
+		fuel = fuelMars
 	case "Juipter":
-		fuel = 1200
+		fuel = fuelJupiter
 	case "Saturn":
-		fuel = 1500
+		fuel = fuelSaturn
 	case "Uranus":
-		fuel = 2000
+		fuel = fuelUranus
 	case "Neptune":
-		fuel = 2500
+		fuel = fuelNeptune
 	}
 	return fuel
 }
@@ -45,7 +52,7 @@ func cantFly() {
 }
 
 // main fucntion for calculating if you can fly to a planet
-func flyToPlanet(planet string, fuel int) int {
+func flyToPlanet(planet string, fuel int) {
 	var fuelRemaining, fuelCost int
 	fuelRemaining = fuel
 
@@ -58,8 +65,6 @@ func flyToPlanet(planet string, fuel int) int {
 		cantFly()
 	}
 	fuelGuage(fuelRemaining)
-	return fuelRemaining
-
 }
 
 // Collects user planet input and compares to list. If not on list the function will restart.
@@ -69,28 +74,26 @@ func planetInput() {
 
 	switch planetChoice {
 	case "Mercury":
-		fmt.Println("We need 700 units of fuel to get there")
+		fmt.Printf("We need %d of fuel to get there.\n", fuelMercury)
 	case "Venus":
-		calculateFuel(planetChoice)
+		fmt.Printf("We need %d of fuel to get there.\n", fuelVenus)
 	case "Earth":
 		fmt.Println("We are already on Earth! Try again.")
 		planetInput()
 	case "Mars":
-		calculateFuel(planetChoice)
+		fmt.Printf("We need %d of fuel to get there.\n", fuelMars)
 	case "Jupiter":
-		calculateFuel(planetChoice)
+		fmt.Printf("We need %d of fuel to get there.\n", fuelJupiter)
 	case "Saturn":
-		calculateFuel(planetChoice)
+		fmt.Printf("We need %d of fuel to get there.\n", fuelSaturn)
 	case "Uranus":
-		calculateFuel(planetChoice)
+		fmt.Printf("We need %d of fuel to get there.\n", fuelUranus)
 	case "Neptune":
-		calculateFuel(planetChoice)
-
+		fmt.Printf("We need %d of fuel to get there.\n", fuelNeptune)
 	default:
 		fmt.Println("That's not a planet!! Try again.")
 		planetInput()
 	}
-
 }
 
 func main() {

@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 // Create the function fuelGauge() here
 func fuelGuage(fuelRemaining int) {
@@ -10,12 +13,31 @@ func fuelGuage(fuelRemaining int) {
 // Create the function calculateFuel() here
 func calculateFuel(planet string) int {
 	var fuel int
-	if planet == "Mercury" {
+
+	// function configured for 'if else' or switch. Comment out either to test.
+
+	//if planet == "Mercury" {
+	//	fuel = 500000
+	//} else if planet == "Venus" {
+	//	fuel = 300000
+	//} else if planet == "Mars" {
+	//	fuel = 700000
+	//} else {
+	//	fmt.Println("That's not a planet!! Try again.")
+	//	os.Exit(69)
+	//}
+	//return fuel
+
+	switch planet {
+	case "Mercury":
 		fuel = 500000
-	} else if planet == "Venus" {
+	case "Venus":
 		fuel = 300000
-	} else if planet == "Mars" {
+	case "Mars":
 		fuel = 700000
+	default:
+		fmt.Println("That's not a planet!! Try again.")
+		os.Exit(69)
 	}
 	return fuel
 }
@@ -52,10 +74,17 @@ func main() {
 	// Test your functions!
 
 	// Create `planetChoice` and `fuel`
+	var planetChoice string
+	var fuelInput int
 
-	fuelAmount := 1000000
-	planetChoice := "Mars"
-	flyToPlanet(planetChoice, fuelAmount)
+	fmt.Println("Where would you like to go? Mars, Venus, or Mercury.")
+	fmt.Scan(&planetChoice)
+
+	//fmt.Println("How much fuel do we have?")
+	//fmt.Scan(&fuelInput)
+	//fuelAmount := 1000000
+	//planetChoice := "Mars"
+	flyToPlanet(planetChoice, fuelInput)
 	// And then liftoff!
 
 }

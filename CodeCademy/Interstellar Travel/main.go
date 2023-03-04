@@ -100,6 +100,7 @@ func planetInput() {
 // Collects inpurt for fuel from user
 func fuelInput() int {
 	var fuelChoice int
+
 	fmt.Println("How much fuel do we have?")
 	fmt.Scan(&fuelChoice)
 	return fuelChoice
@@ -108,6 +109,7 @@ func fuelInput() int {
 // Asks the user if they would like to play again
 func restartGame() {
 	var restartGameInput string
+
 	fmt.Println("Would you like to try another planet? Yes or No")
 	fmt.Scan(&restartGameInput)
 
@@ -118,7 +120,6 @@ func restartGame() {
 	} else {
 		os.Exit(0)
 	}
-
 }
 
 func main() {

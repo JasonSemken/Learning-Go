@@ -8,6 +8,11 @@ import (
 	"strings"
 )
 
+type problem struct {
+	q string
+	a string
+}
+
 func main() {
 	csvFilename := flag.String("csv", "problems.csv", "a csv file in the format of 'question,answer'")
 	flag.Parse()
@@ -46,11 +51,6 @@ func parseLines(lines [][]string) []problem {
 		}
 	}
 	return ret
-}
-
-type problem struct {
-	q string
-	a string
 }
 
 func exit(msg string) {

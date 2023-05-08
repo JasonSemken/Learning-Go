@@ -6,15 +6,17 @@ import (
 )
 
 func main() {
-	openFile()
+	fmt.Println(openFile())
 }
 
 // Open select file
-func openFile() {
-	_, err := os.Open("./files/test_file.pdf")
+func openFile() *os.File {
+
+	f, err := os.Open("./files/test_file.pdf")
 	if err != nil {
 		fmt.Println("Error!! ", err)
 	}
+	return f
 }
 
 // Read directory and list out file names

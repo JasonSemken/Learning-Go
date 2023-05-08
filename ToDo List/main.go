@@ -1,41 +1,32 @@
-// Code guide: https://golang.company/blog/build-a-simple-todo-app-with-golang-and-basic-css-and-javascript
-
 package main
 
 import (
-	"html/template"
-	"log"
-	"net/http"
+	"fmt"
+	"io/ioutil"
 )
 
-var tmpl *template.Template
-
-type List struct {
-	Object string
-	Finish bool
-}
-type PageInfo struct {
-	Title string
-	Todos []List
-}
-
-func list(w http.ResponseWriter, r *http.Request) {
-	data := PageInfo{
-		Title: "ToDo List",
-		Todos: []List{
-			{Object: "Write scripts", Finish: true},
-			{Object: "Shoot video", Finish: false},
-			{Object: "Edit the video", Finish: false},
-		},
-	}
-	tmpl.Execute(w, data)
-}
-
 func main() {
-	mux := http.NewServeMux()
-	tmpl = template.Must(template.ParseFiles("templates/jason.gohtml"))
-	fs := http.FileServer(http.Dir("./static"))
-	mux.Handle("/static/", http.StripPrefix("/static/", fs))
-	mux.HandleFunc("/list", list)
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	//fmt.Println(loadList())
+	newList()
+}
+
+// Reads directory for file named 'My_list.txt', if no file s found a new file is created
+func newList() {
+	d, err := ioutil.ReadDir(".")
+	if err != nil {
+		fmt.Println("Error:")
+	}
+
+	// For loop to search found file in directory for file named 'My_list.txt'
+	for _, f := range d {
+		if f.Name() == "My_list.txt" {
+			fmt.Println("Yay! Found a file!")
+		} else {
+			e := []byte("")
+			err := ioutil.WriteFile("My_list.txt", e, 0666)
+			if err != nil {
+				fmt.Println("Error: Doesn't wanna save a new file!!")
+			}
+		}
+	}
 }

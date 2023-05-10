@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type data []string
+var ListData []string
 
 func main() {
 	//fmt.Println(loadList())
@@ -29,6 +29,7 @@ func homePage() {
 	case "1":
 		fmt.Println("Loading file")
 		printData(loadFile())
+		editPage()
 	case "2":
 		fmt.Println("You selected 2")
 	case "3":
@@ -71,7 +72,32 @@ func newFile() {
 }
 
 func printData(d []string) {
+	fmt.Printf("\n\nThis is what you have to do!!\n")
 	for i, s := range d {
 		fmt.Println(i, s)
 	}
+}
+
+func editPage() {
+	var t string
+	fmt.Printf("\n\nEditing page!!\n")
+	fmt.Println("0 - Add to list         1 - Remove from list")
+	fmt.Printf("2 - Print list          3 - Return to Home Page\n\n")
+	fmt.Scan(&t)
+	switch t {
+	case "0":
+		fmt.Println("You selected 0")
+	case "1":
+		fmt.Println("You selected 1")
+	case "2":
+		fmt.Println("You selected 2")
+		editPage()
+	case "3":
+		fmt.Println("You selected 3")
+		homePage()
+	default:
+		fmt.Println("Incorrect input")
+		editPage()
+	}
+
 }

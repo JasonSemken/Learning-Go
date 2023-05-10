@@ -4,11 +4,14 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 )
+
+type data []string
 
 func main() {
 	//fmt.Println(loadList())
-	//fmt.Println(newList())
+	//fmt.Println(loadFile())
 	homePage()
 }
 
@@ -24,8 +27,8 @@ func homePage() {
 		fmt.Println("You selected 0")
 		newFile()
 	case "1":
-		fmt.Println("You selected 1")
-		newList()
+		fmt.Println("Loading file")
+		printData(loadFile())
 	case "2":
 		fmt.Println("You selected 2")
 	case "3":
@@ -38,9 +41,8 @@ func homePage() {
 }
 
 // Reads directory for file named 'My_list.txt', if file found data loaded to byte, if no file found empty file created
-func newList() []byte {
-	var data []byte
-
+func loadFile() []string {
+	var s []string
 	d, err := ioutil.ReadDir(".")
 	if err != nil {
 		fmt.Println("Error:")
@@ -48,14 +50,15 @@ func newList() []byte {
 	for _, f := range d {
 		if f.Name() == "My_list.txt" {
 			fmt.Println("Yay! Found a file!")
-			data, _ := ioutil.ReadFile("My_list.txt")
-			return data
+			d, _ := ioutil.ReadFile("My_list.txt")
+			s := strings.Split(string(d), ",")
+			return s
 		} else {
 			fmt.Println("No file Found :( Created new file!!")
 			newFile()
 		}
 	}
-	return data
+	return s
 }
 
 // Creates new file
@@ -64,5 +67,11 @@ func newFile() {
 	err := ioutil.WriteFile("My_list.txt", e, 0666)
 	if err != nil {
 		fmt.Println("Error: Doesn't wanna save a new file!!")
+	}
+}
+
+func printData(d []string) {
+	for i, s := range d {
+		fmt.Println(i, s)
 	}
 }

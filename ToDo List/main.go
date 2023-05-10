@@ -3,11 +3,38 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 )
 
 func main() {
 	//fmt.Println(loadList())
-	fmt.Println(newList())
+	//fmt.Println(newList())
+	homePage()
+}
+
+// Home page for ToDo list
+func homePage() {
+	var uI string
+	fmt.Printf("\nWelcome to the homepage!!\nWhat do you wanna do?\n\n")
+	fmt.Println("0 - Start a new File   1 - Load file")
+	fmt.Printf("2 - Save File          3 - Exit program\n\n")
+	fmt.Scan(&uI)
+	switch uI {
+	case "0":
+		fmt.Println("You selected 0")
+		newFile()
+	case "1":
+		fmt.Println("You selected 1")
+		newList()
+	case "2":
+		fmt.Println("You selected 2")
+	case "3":
+		fmt.Println("Closing program")
+		os.Exit(1)
+	default:
+		fmt.Println("Incorrect input")
+		homePage()
+	}
 }
 
 // Reads directory for file named 'My_list.txt', if file found data loaded to byte, if no file found empty file created

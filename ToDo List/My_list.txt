@@ -1,1 +1,1 @@
-tree,ground,coal,dirt
+trees,boats,dogs,cats,land

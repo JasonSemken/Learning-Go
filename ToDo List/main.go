@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"os"
 	"strings"
 )
 
@@ -11,7 +10,6 @@ var listData []string
 
 func main() {
 	homePage()
-
 }
 
 // Home page for ToDo list
@@ -23,19 +21,16 @@ func homePage() {
 	fmt.Scan(&uI)
 	switch uI {
 	case "0": // Create new file
-		fmt.Println("You selected 0")
 		newFile()
+		editPage()
 	case "1": // Load file
 		fmt.Println("Loading file")
 		listData = loadFile()
 		editPage()
 	case "2": // Save file
-		fmt.Println("You selected 2")
 		saveFile(listData)
-		os.Exit(1)
 	case "3": // Exit program
 		fmt.Println("Closing program")
-		os.Exit(1)
 	default:
 		fmt.Println("Incorrect input")
 		homePage()
@@ -58,16 +53,13 @@ func editPage() {
 		editPage()
 	case "1": // remove item from list - doesn't work
 		var r string
-		fmt.Println("You selected 1")
 		printData(listData)
 		fmt.Println("Enter key to remove list item")
 		fmt.Scan(&r)
 	case "2": // Print current list items
-		fmt.Println("You selected 2")
 		printData(listData)
 		editPage()
 	case "3": // Return to home page
-		fmt.Println("You selected 3")
 		homePage()
 	default:
 		fmt.Println("Incorrect input")

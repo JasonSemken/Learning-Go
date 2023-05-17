@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"strconv"
 	"strings"
 )
 
@@ -51,11 +52,13 @@ func editPage() {
 		fmt.Scan(&i)
 		listData = addToList(i)
 		editPage()
-	case "1": // remove item from list - doesn't work
+	case "1": // remove item from list - app panics if the inccorect input is entered.
 		var r string
 		printData(listData)
-		fmt.Println("Enter key to remove list item")
+		fmt.Println("\nEnter key to remove list item")
 		fmt.Scan(&r)
+		removeFromList(listData, r)
+		editPage()
 	case "2": // Print current list items
 		printData(listData)
 		editPage()
@@ -130,4 +133,10 @@ func printData(d []string) {
 func addToList(line string) []string {
 	listData = append(listData, line)
 	return listData
+}
+
+// Remove item from slice
+func removeFromList(slice []string, sV string) {
+	iV, _ := strconv.Atoi(sV)
+	listData = append(slice[:iV], slice[iV+1:]...)
 }

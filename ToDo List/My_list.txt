@@ -1,1 +1,1 @@
-trees,boats,dogs,cats,land
+trees,boats,cats,land

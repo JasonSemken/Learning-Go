@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 var listData []string
@@ -30,6 +31,7 @@ func homePage() {
 		editPage()
 	case "2": // Save file
 		saveFile(listData)
+		homePage()
 	case "3": // Exit program
 		fmt.Println("Closing program")
 	default:
@@ -57,7 +59,7 @@ func editPage() {
 		printData(listData)
 		fmt.Println("\nEnter key to remove list item")
 		fmt.Scan(&r)
-		removeFromList(listData, r)
+		removeItemVerify(r)
 		editPage()
 	case "2": // Print current list items
 		printData(listData)
@@ -135,8 +137,29 @@ func addToList(line string) []string {
 	return listData
 }
 
-// Remove item from slice
-func removeFromList(slice []string, sV string) {
-	iV, _ := strconv.Atoi(sV)
-	listData = append(slice[:iV], slice[iV+1:]...)
+// Checks input to see if it's a letter or number. if number, removes item from listData slice
+func removeItemVerify(input string) {
+	var l int
+	if isLetter(input) {
+		iV, _ := strconv.Atoi(input)
+		l = len(listData)
+		if iV <= l {
+			fmt.Printf("Removed item: %d", iV)
+			listData = append(listData[:iV], listData[iV+1:]...)
+		} else {
+			fmt.Printf("%d is not a item number", iV)
+		}
+	} else {
+		fmt.Println("Incorrect input")
+	}
+}
+
+// Functions check to see if input is a letter
+func isLetter(s string) bool {
+	for _, r := range s {
+		if unicode.IsLetter(r) {
+			return false
+		}
+	}
+	return true
 }
